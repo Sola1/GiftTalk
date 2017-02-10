@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context="com.sola.gifttalk.activity.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
         android:orientation="vertical">
 
-    </LinearLayout>
+    </FrameLayout>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -23,39 +23,33 @@
 
         <RadioButton
             android:id="@+id/rb_home"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-
-            android:gravity="center_horizontal" />
+            style="@style/radio_button"
+            android:checked="true"
+            android:drawableTop="@drawable/radiobutton_home_bg"
+            android:text="首页" />
 
         <RadioButton
             android:id="@+id/rb_gift"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null" />
+            style="@style/radio_button"
+            android:drawableTop="@drawable/radiobutton_gift_bg"
+            android:text="榜单" />
 
         <RadioButton
             android:id="@+id/rb_mall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null" />
+            style="@style/radio_button"
+            android:drawableTop="@drawable/radiobutton_mall_bg"
+            android:text="商店" />
 
         <RadioButton
             android:id="@+id/rb_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null" />
+            style="@style/radio_button"
+            android:drawableTop="@drawable/radiobutton_category_bg"
+            android:text="分类" />
 
         <RadioButton
             android:id="@+id/rb_profile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null" />
+            style="@style/radio_button"
+            android:drawableTop="@drawable/radiobutton_profile_bg"
+            android:text="我的" />
     </RadioGroup>
 </LinearLayout>
