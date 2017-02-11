@@ -8,6 +8,7 @@
     tools:context="com.sola.gifttalk.activity.MainActivity">
 
     <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
@@ -16,6 +17,7 @@
     </FrameLayout>
 
     <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
