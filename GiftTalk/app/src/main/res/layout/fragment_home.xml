@@ -3,9 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<TextView
-    android:textSize="50sp"
-    android:text="主页"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="2"
+            android:src="@mipmap/logo_title_c" />
+
+        <TextView
+            android:id="@+id/tv_home_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="7"
+            android:background="@drawable/search"
+            android:drawableLeft="@mipmap/icon_search"
+            android:gravity="center"
+            android:text="选份走心好礼送给Ta" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_gift_send_remind" />
+
+
+    </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_home"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9" />
 </LinearLayout>

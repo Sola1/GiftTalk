@@ -49,12 +49,10 @@ public class CategoryFragment extends BaseFragment {
             tabLayout.getTabAt(i).setText(adapter.getTitles(i));
         }
 
-        Drawable drawable = getResources().getDrawable(R.drawable.search);
-        drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
-        searchTv.setCompoundDrawables(drawable,null,null,null);
-        searchTv.setCompoundDrawablePadding(10);
-
-
+//        Drawable drawable = getResources().getDrawable(R.drawable.search);
+//        drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
+//        searchTv.setCompoundDrawables(drawable,null,null,null);
+//        searchTv.setCompoundDrawablePadding(10);
 
     }
 

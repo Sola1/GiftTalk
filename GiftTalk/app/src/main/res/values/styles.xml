@@ -16,5 +16,9 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@drawable/radiobutton_text_color</item>
     </style>
+    <style name="gift_pop_window">
+        <item name="android:windowEnterAnimation">@anim/gift_enter_pop_window</item>
+        <item name="android:windowExitAnimation">@anim/gift_exit_pop_window</item>
+    </style>
 
 </resources>

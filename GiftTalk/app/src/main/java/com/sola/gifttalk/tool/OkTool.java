@@ -68,7 +68,7 @@ public class OkTool implements NetInterface {
                 String str = response.body().string();
                 //解析网络数据
                 final T result = gson.fromJson(str,tClass);
-            handler.post(new Runnable() {
+            handler.post( new Runnable() {
                 @Override
                 public void run() {
                     callBack.onSuccess(result);
