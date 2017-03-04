@@ -3,8 +3,9 @@ package com.sola.gifttalk.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
+import com.androidkun.PullToRefreshRecyclerView;
+import com.androidkun.callback.PullToRefreshListener;
 import com.sola.gifttalk.R;
 import com.sola.gifttalk.activity.HomeContentActivity;
 import com.sola.gifttalk.adapter.HomeFragmentPagerAdapter;
@@ -27,11 +28,12 @@ import java.util.List;
 public class HomeReUseFragment extends BaseFragment {
     private RefuseBean.DataBean.ItemsBean itemsBean;
     private ArrayList<RefuseBean.DataBean.ItemsBean> itemsBeen;
-    private RecyclerView recyclerView;
+    private PullToRefreshRecyclerView pullToRefreshRecyclerView;
     private HomeRecyclerViewAdapter adapter;
     private List<HomeImageBean.DataBean.SecondaryBannersBean> secondaryBannersBeen;
     private String contentUrl;
     private RefuseBean refuseBean;
+    private String url;
 
 
     @Override
@@ -41,20 +43,83 @@ public class HomeReUseFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        recyclerView = bindView(R.id.recycler_view_refuse);
+        pullToRefreshRecyclerView = bindView(R.id.recycler_view_refuse);
 
     }
 
     @Override
     protected void initData() {
         adapter = new HomeRecyclerViewAdapter(getContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Bundle result = getArguments();
         final ChannelBean.DataBean.ChannelsBean channelsBean = result.getParcelable("channelsBeen");
         int id = channelsBean.getId();
         final int pos = result.getInt("pos");
-        String url = "http://api.liwushuo.com/v2/channels/" + id + "/items_v2?gender=1&generation=2&limit=20&offset=0";
+        url = "http://api.liwushuo.com/v2/channels/" + id + "/items_v2?gender=1&generation=2&limit=20&offset=0";
+        //解析首页数据的方法
+        loadHomePage(pos);
+        //解析首页图片
+        NetTool.getInstance().startRequest(Urls.HOME_PICES, HomeImageBean.class, new CallBack<HomeImageBean>() {
+            @Override
+            public void onSuccess(HomeImageBean response) {
+                secondaryBannersBeen = response.getData().getSecondary_banners();
+                if (secondaryBannersBeen != null){
+                    adapter.setSecondaryBannersBeen(secondaryBannersBeen);
+                    pullToRefreshRecyclerView.setAdapter(adapter);
 
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+        });
+
+
+        //是否开启下拉刷新功能
+        pullToRefreshRecyclerView.setPullRefreshEnabled(true);
+        //是否开启上拉加载功能
+        pullToRefreshRecyclerView.setLoadingMoreEnabled(true);
+        //设置是否显示上次刷新的时间
+        pullToRefreshRecyclerView.displayLastRefreshTime(true);
+        //设置刷新回调
+        pullToRefreshRecyclerView.setPullToRefreshListener(new PullToRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                pullToRefreshRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadHomePage(pos);
+                        //刷新完成
+                        pullToRefreshRecyclerView.setRefreshComplete();
+                    }
+                },1500);
+
+            }
+
+
+            @Override
+            public void onLoadMore() {
+                pullToRefreshRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullToRefreshRecyclerView.setLoadMoreComplete();
+                        loadHomePage(pos);
+                    }
+                },1500);
+
+
+
+            }
+        });
+        //主动触发下拉刷新操作
+        //pullToRefreshRV.onRefresh();
+
+    }
+    //解析首页数据的方法
+    private void loadHomePage(final int pos) {
         NetTool.getInstance().startRequest(url, RefuseBean.class, new CallBack<RefuseBean>() {
             @Override
             public void onSuccess(RefuseBean response) {
@@ -72,27 +137,6 @@ public class HomeReUseFragment extends BaseFragment {
 
             }
         });
-        //解析首页图片
-        NetTool.getInstance().startRequest(Urls.HOME_PICES, HomeImageBean.class, new CallBack<HomeImageBean>() {
-            @Override
-            public void onSuccess(HomeImageBean response) {
-                secondaryBannersBeen = response.getData().getSecondary_banners();
-                if (secondaryBannersBeen != null){
-                    adapter.setSecondaryBannersBeen(secondaryBannersBeen);
-                    recyclerView.setAdapter(adapter);
-                }
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-            }
-        });
-
-
-
-
-
     }
 
     @Override

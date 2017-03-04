@@ -43,4 +43,5 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.0'
     compile 'org.greenrobot:greendao:3.2.0'
     compile files('libs/MobCommons-2017.0216.1054.jar')
+    compile 'com.androidkun:pulltorefreshrecyclerview:1.0.5'
 }

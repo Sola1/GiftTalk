@@ -118,7 +118,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHoler>
 
     @Override
     public int getItemCount() {
-        return itemsBeen != null ? itemsBeen.size() + 1 : 0;
+        return itemsBeen != null ? itemsBeen.size() + 2 : 0;
     }
 
     @Override
