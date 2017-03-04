@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.sola.gifttalk.R;
@@ -27,7 +29,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private MyReceiver myReceiver;
     private int id = 0;
 
-
     @Override
     public int bindLayout() {
         return R.layout.activity_main;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void initView() {
         radioGroup = bindView(R.id.radio_group);
     }
+
 
     @Override
     protected void initData() {
@@ -50,17 +52,20 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         Log.d("MainActivity", "isLoad:" + isLoad);
 
         fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
-        fragmentTransaction1.add(R.id.frame, new HomeFragment());
-        fragmentTransaction1.commit();
 
         //接收从GiftActivity传过来的id 如果id为1 就让默认显示登录的fragment
         id = getIntent().getIntExtra("id",id);
         Log.d("MainActivity", "id:" + id);
         if(id == 1){
-            FragmentTransaction f = fragmentManager.beginTransaction();
-            f.add(R.id.frame, new ProfileFragment());
-            f.commit();
+            RadioButton childAt = (RadioButton) radioGroup.getChildAt(4);
+            childAt.setChecked(true);
+            FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+            fragmentTransaction1.add(R.id.frame, new ProfileFragment());
+            fragmentTransaction1.commit();
+        } else {
+            FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+            fragmentTransaction1.add(R.id.frame, new HomeFragment());
+            fragmentTransaction1.commit();
         }
 
     }

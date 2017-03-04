@@ -30,8 +30,10 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.tencent.qq.QQ;
 
 /**
  * Created by dllo on 17/2/23.
@@ -48,6 +50,7 @@ public class GiftContentActivity extends BaseActivity {
     private String url;
     private boolean isLoad = false;
     private int id = 1;
+    private Platform qq;
 
     @Override
     public int bindLayout() {
@@ -70,6 +73,8 @@ public class GiftContentActivity extends BaseActivity {
     @Override
     protected void initData() {
         ShareSDK.initSDK(this);
+
+        qq = ShareSDK.getPlatform(QQ.NAME);
         showWebView();
         String title = getIntent().getStringExtra("title");
         String name = getIntent().getStringExtra("name");
@@ -86,9 +91,6 @@ public class GiftContentActivity extends BaseActivity {
         banner.setIndicatorGravity(BannerConfig.CENTER);//设置小圆点的位置
         banner.start();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Load",MODE_PRIVATE);
-        isLoad = sharedPreferences.getBoolean("isLoad",false);
-        Log.d("GiftContentActivity", "isLoad:" + isLoad);
 
     }
 
@@ -133,8 +135,8 @@ public class GiftContentActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //如果选中就收藏
-                if (isChecked = true) {
-                    if (isLoad = true) {
+                if (isChecked == true) {
+                    if (qq.isAuthValid()) {
                         //TODO 判断如果登录再操作
                         Collect collect = new Collect();
                         collect.setUrl(url);
@@ -167,7 +169,6 @@ public class GiftContentActivity extends BaseActivity {
     }
 
     private void showShare() {
-        ShareSDK.initSDK(this);
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();

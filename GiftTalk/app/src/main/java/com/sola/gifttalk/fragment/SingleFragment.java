@@ -12,6 +12,7 @@ import com.sola.gifttalk.R;
 import com.sola.gifttalk.adapter.SingleLeftListViewAdapter;
 import com.sola.gifttalk.adapter.SingleRightListViewAdapter;
 import com.sola.gifttalk.bean.SingleBean;
+import com.sola.gifttalk.bean.SingleContent;
 import com.sola.gifttalk.inter.CallBack;
 import com.sola.gifttalk.tool.NetTool;
 import com.sola.gifttalk.urls.Urls;
@@ -29,6 +30,8 @@ public class SingleFragment extends BaseFragment{
     private SingleRightListViewAdapter singleRightListViewAdapter;
     private List<SingleBean.DataBean.CategoriesBean> categoriesBeen;
     private int scrollPos;
+    private ArrayList<SingleContent.DataBean> dataBeen;
+    private SingleContent singleContent;
 
     @Override
     protected int bindLayout() {
@@ -73,7 +76,6 @@ public class SingleFragment extends BaseFragment{
 
             }
         });
-
     }
 
     @Override

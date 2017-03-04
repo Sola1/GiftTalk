@@ -32,9 +32,6 @@ public class StrategyFragment extends BaseFragment {
     private static final String TAG = "StrategyFragment";
     private StrategyRecyclerAdapter adapter;
     private ArrayList<StrategyHeadBean.DataBean.ColumnsBean> columnsBeen;
-    private List<StrategyBottomCotentBean.DataBean.ItemsBean> itemsBeen;
-    private List<StrategyBottomCotentBean.DataBean> dataBeen;
-    private StrategyBottomCotentBean.DataBean dataBean;
     private RecyclerView recyclerView;
 
     @Override
@@ -69,19 +66,6 @@ public class StrategyFragment extends BaseFragment {
             @Override
             public void onSuccess(StrategyBottomBean response) {
                 adapter.setChannelsBeen(response.getData().getChannel_groups());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        });
-
-        NetTool.getInstance().startRequest(Urls.STRATEGY_BOTTOM_CONTENT, StrategyBottomCotentBean.class, new CallBack<StrategyBottomCotentBean>() {
-            @Override
-            public void onSuccess(StrategyBottomCotentBean response) {
-                itemsBeen = response.getData().getItems();
-                adapter.setItemsBeen(itemsBeen);
             }
 
             @Override

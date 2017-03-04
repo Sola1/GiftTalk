@@ -1,6 +1,7 @@
 package com.sola.gifttalk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.sola.gifttalk.R;
+import com.sola.gifttalk.activity.SingleContentActivity;
 import com.sola.gifttalk.bean.SingleBean;
+import com.sola.gifttalk.bean.SingleContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +27,7 @@ import java.util.List;
 public class SingleRightGridViewAdapter extends BaseAdapter {
     private List<SingleBean.DataBean.CategoriesBean.SubcategoriesBean> subcategoriesBeen;
     private Context context;
+
 
     public SingleRightGridViewAdapter(Context context) {
         this.context = context;
@@ -60,14 +65,6 @@ public class SingleRightGridViewAdapter extends BaseAdapter {
         }
         holder.rightTv.setText(subcategoriesBeen.get(position).getName());
         Glide.with(context).load(subcategoriesBeen.get(position).getIcon_url()).into(holder.rightIv);
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO  没错 就是在这写监听事件
-                Toast.makeText(context, "啦啦啦", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return convertView;
     }

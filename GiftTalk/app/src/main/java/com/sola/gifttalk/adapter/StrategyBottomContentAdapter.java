@@ -17,12 +17,8 @@ import java.util.List;
 
 public class StrategyBottomContentAdapter extends RecyclerView.Adapter<BaseViewHoler> {
     private List<StrategyBottomCotentBean.DataBean.ItemsBean> itemsBeen;
-    private StrategyBottomCotentBean.DataBean.ItemsBean itemsBean;
     private Context context;
 
-    public void setItemsBean(StrategyBottomCotentBean.DataBean.ItemsBean itemsBean) {
-        this.itemsBean = itemsBean;
-    }
 
     public StrategyBottomContentAdapter(Context context) {
         this.context = context;
@@ -46,6 +42,10 @@ public class StrategyBottomContentAdapter extends RecyclerView.Adapter<BaseViewH
         holder.setText(R.id.tv_strategy_bottom_content_name, itemsBeen.get(position).getAuthor().getNickname());
         holder.setText(R.id.tv_strategy_bottom_content_introduction,itemsBeen.get(position).getAuthor().getIntroduction());
         holder.setText(R.id.tv_strategy_bottom_content_title,itemsBeen.get(position).getTitle());
+        holder.setImage(R.id.iv_strategy_bottom_content_icon,itemsBeen.get(position).getAuthor().getAvatar_url(),context);
+        holder.setImage(R.id.iv_strategy_bottom_content_image_url,itemsBeen.get(position).getCover_image_url());
+        holder.setText(R.id.tv_strategy_bottom_content_short,itemsBeen.get(position).getShare_msg());
+        holder.setText(R.id.tv_strategy_bottom_content_count, String.valueOf(itemsBeen.get(position).getLikes_count()));
 
     }
 

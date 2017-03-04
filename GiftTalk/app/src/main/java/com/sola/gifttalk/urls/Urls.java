@@ -28,9 +28,14 @@ public class Urls {
     public static final String SINGLE = "http://api.liwushuo.com/v2/item_categories/tree";
     //首页图片接口
     public final static String HOME_PICES="http://api.liwushuo.com/v2/secondary_banners?gender=1&generation=2";
-    //单品二级界面
-    public final static String Single_Content = "http://api.liwushuo.com/v2/item_subcategories/7/items?limit=20&offset=0";
+    //搜索页接口
     public final static String SEARCH = "http://api.liwushuo.com/v2/search/hot_words";
+    //单品页二级页面
+    public static final String SINGE_SECOND_UP = "http://api.liwushuo.com/v2/item_subcategories/";
+    public static final String SINGE_SECOND_DOWN = "/items?limit=20&offset=0";
+    //攻略下半部分二级界面
+    public static final String STRATEGY_BOTTOM_CONTENT_UP = "http://api.liwushuo.com/v2/channels/";
+    public static final String STRATEGY_BOTTOM_CONTENT_DOWN ="/items_v2?order_by=now&limit=20&offset=0";
 
 
 

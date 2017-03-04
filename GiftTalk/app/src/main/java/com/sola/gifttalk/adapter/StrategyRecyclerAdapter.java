@@ -2,6 +2,7 @@ package com.sola.gifttalk.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,17 +33,6 @@ public class StrategyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private Context context;
     private ArrayList<StrategyHeadBean.DataBean.ColumnsBean> columnsBeen;
     private List<StrategyBottomBean.DataBean.ChannelGroupsBean> channelGroups;
-    private List<StrategyBottomCotentBean.DataBean.ItemsBean> itemsBeen;
-    private List<StrategyBottomCotentBean.DataBean> dataBeen;
-
-    public void setDataBeen(List<StrategyBottomCotentBean.DataBean> dataBeen) {
-        this.dataBeen = dataBeen;
-    }
-
-    public void setItemsBeen(List<StrategyBottomCotentBean.DataBean.ItemsBean> itemsBeen) {
-        this.itemsBeen = itemsBeen;
-        notifyDataSetChanged();
-    }
 
 
     public void setContext(Context context) {
@@ -91,12 +81,14 @@ public class StrategyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                         .setLayoutManager(new GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false));
                 strategyBottomRecyclerViewAdapter.setChannelsBeen(channelGroups.get(position - 1).getChannels());
                 strategyBottomHolder.bottomRecyclerView.setAdapter(strategyBottomRecyclerViewAdapter);
+
                 strategyBottomRecyclerViewAdapter.setItemInter(new RecyclerItemInter() {
                     @Override
                     public void onItemJump(int pos) {
+                        Bundle bundle = new Bundle();
                         Intent intent = new Intent(context, StrategyBottomActivity.class);
-                        Log.e("StrategyRecyclerAdapter", "dataBeen.get(pos):" + itemsBeen.get(pos));
-                        intent.putParcelableArrayListExtra("itemsBeen", (ArrayList<? extends Parcelable>) itemsBeen);
+                        bundle.putParcelable("channelsBean",channelGroups.get(position - 1).getChannels().get(pos));
+                        intent.putExtra("bundle",bundle);
                         context.startActivity(intent);
                     }
                 });
@@ -107,8 +99,6 @@ public class StrategyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 strategyHeadHolder.headRecyclerView.setLayoutManager(new GridLayoutManager(context, 3, LinearLayoutManager.HORIZONTAL, false));
                 strategyHeadRecyclerViewAdapter.setColumnsBeen(columnsBeen);
                 strategyHeadHolder.headRecyclerView.setAdapter(strategyHeadRecyclerViewAdapter);
-
-
 
                 break;
         }
